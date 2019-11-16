@@ -1,0 +1,56 @@
+TP base de datos:
+
+
+
+Crear proyecto nuevo, DESDE cmd como admin
+en ruteo poner que si!
+
+en enviroment.ts
+
+export const environment = {
+  production: false,
+  firebaseConfig:  {
+    apiKey: "AIzaSyANa-Re7JgFEKsoCLKGCaSkP9sehIc78DM",
+    authDomain: "tp-bdd-brino.firebaseapp.com",
+    databaseURL: "https://tp-bdd-brino.firebaseio.com",
+    projectId: "tp-bdd-brino",
+    storageBucket: "tp-bdd-brino.appspot.com",
+    messagingSenderId: "903992996908",
+    appId: "1:903992996908:web:8d76513590aa8185224d89"
+  }
+};
+
+
+esto lo sacas de firebase
+creas nuevo proyecto en modo produccion
+
+elejimos ubicacion southamerica
+
+tambien creamos un storage
+
+despues ruedita, configuracion y copiamos lo de arriba
+
+ng add firebase
+ng add @angular/material
+ng add @angular/fire
+
+
+en  app.module.ts agregar.
+
+import { AngularFireModule} from '@angular/fire';
+import {enviroment} from 'src/environments/environment';
+import { FormsModule} from '@angular/forms';
+
+y en imports 
+AngularFireModule.initializeApp(enviroment.firebaseConfig)
+
+y FormsModule,
+
+
+
+
+
+
+
+
+
