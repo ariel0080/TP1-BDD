@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tp-bdd-brino": {
+      "hosting": {
+        "TP1-BDD-BRINO": [
+          "tp-bdd-brino"
+        ]
+      }
+    }
+  }
+}
