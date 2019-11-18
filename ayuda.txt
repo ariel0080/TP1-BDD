@@ -47,6 +47,14 @@ AngularFireModule.initializeApp(enviroment.firebaseConfig)
 y FormsModule,
 
 
+en storage reglas  allow read, write: if request.auth != true;
+
+
+instalar para el material que lea archivos
+
+npm i ngx-material-file-input
+
+database reglas allow read, write: if true;
 
 
 
