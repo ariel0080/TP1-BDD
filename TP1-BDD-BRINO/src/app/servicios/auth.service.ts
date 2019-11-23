@@ -22,7 +22,7 @@ export class AuthService {
         usuario.email,
         password
       );
-      this.userService.persistirUsuario(usuario, res.user.uid);
+      this.userService.persistirUsuario(usuario);// res.user.uid);
     } catch (err) {
       salida = err.message;
     }
