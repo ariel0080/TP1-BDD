@@ -1,55 +1,83 @@
 
-
+<app-barra-titulo></app-barra-titulo>
 <mat-card>
-
-  <mat-card-title>Registro de Usuario</mat-card-title>
-
-  <mat-card-content>
-
-      <div class="example-container">
-
-        <mat-form-field>
-
-            <input matInput #input maxlength="30" placeholder="Ingrese Nombre" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}">
-            <mat-hint align="end">{{ input.value?.length || 0 }}/30</mat-hint>
-
+  <mat-card-header>
+    <mat-card-title>
+      Alta de usuario
+    </mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="usuarioForm" (ngSubmit)="guardarForm()">
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="nombre"
+            name="nombre"
+            placeholder="Ingrese nombre"
+          />
         </mat-form-field>
-
-
-
-            <mat-form-field>
-
-                <input matInput #input maxlength="30" placeholder="Ingrese Apellido" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}">
-                <mat-hint align="end">{{ input.value?.length || 0 }}/30</mat-hint>
-
-            </mat-form-field>
-
-            <mat-form-field>
-
-                <input matInput placeholder="Enter your email" [formControl]="correo" required [(ngModel)]="email" >
-                <mat-error *ngIf="correo.invalid">{{getErrorMessage()}}</mat-error>
-
-            </mat-form-field>
-
-
-         <mat-form-field>
-
-          <ngx-mat-file-input placeholder="Ingrese Foto"> </ngx-mat-file-input>
-          <mat-icon matSuffix>folder</mat-icon>
-
-        </mat-form-field>
-
-        <!-- <mat-form-field>
-
-
-
-
-          </mat-form-field> -->
-
-
       </div>
-
-  </mat-card-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="apellido"
+            name="apellido"
+            placeholder="Ingrese apellido"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            name="email"
+            placeholder="Ingrese email"
+          />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            name="password"
+            placeholder="Ingrese password"
+          />
+          <mat-icon matSuffix>vpn_key</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-label>Foto</mat-label>
+          <ngx-mat-file-input
+            formControlName="foto"
+            name="foto"
+            observeFiles
+            placeholder="Ingrese foto"
+          ></ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit" color="primary">
+        Aceptar
+      </button>
+      <button mat-raised-button (click)="cancelarForm()" color="warn">
+        Cancelar
+      </button>
+    </mat-card-actions>
+  </form>
 </mat-card>
-
-<button  (click)="altaUsuario()">Enviar</button>

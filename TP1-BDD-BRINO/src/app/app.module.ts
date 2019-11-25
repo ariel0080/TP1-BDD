@@ -1,50 +1,91 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormControl, ReactiveFormsModule} from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { environment } from 'src/environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularFireModule} from '@angular/fire';
-import {environment} from 'src/environments/environment';
-import { AltaUsuarioComponent } from './componentes/alta-usuario/alta-usuario.component';
 import { AltaProductoComponent } from './componentes/alta-producto/alta-producto.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCardModule} from '@angular/material/card';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AltaUsuarioComponent } from './componentes/alta-usuario/alta-usuario.component';
+import { BarraTituloComponent } from './componentes/barra-titulo/barra-titulo.component';
+import { LoginComponent } from './componentes/login/login.component';
 import { AuthService } from './servicios/auth.service';
 import { UsuarioService } from './servicios/usuario.service';
-import { MaterialFileInputModule} from 'ngx-material-file-input';
-import { MatInputModule, MatButtonModule } from '@angular/material';
-
+import { PaginaNoEncontradaComponent } from './componentes/pagina-no-encontrada/pagina-no-encontrada.component';
+import { PaginaPrincipalComponent } from './componentes/pagina-principal/pagina-principal.component';
+import { BarraHerramientasComponent } from './componentes/barra-herramientas/barra-herramientas.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { TablaListadosUsuariosComponent } from './componentes/tabla-listados-usuarios/tabla-listados-usuarios.component';
+import { TablaListadosProductosComponent } from './componentes/tabla-listados-productos/tabla-listados-productos.component';
+import { TablaListadosLocalesComponent } from './componentes/tabla-listados-locales/tabla-listados-locales.component';
+import { TablaListadosMovimientosComponent } from './componentes/tabla-listados-movimientos/tabla-listados-movimientos.component';
+import { ProductoService } from './servicios/producto.service';
+import { AltaLocalComponent } from './componentes/alta-local/alta-local.component';
+import { LocalService } from './servicios/local.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AltaUsuarioComponent,
-    AltaProductoComponent
+    AltaProductoComponent,
+    LoginComponent,
+    BarraTituloComponent,
+    PaginaNoEncontradaComponent,
+    PaginaPrincipalComponent,
+    BarraHerramientasComponent,
+    TablaListadosUsuariosComponent,
+    TablaListadosProductosComponent,
+    TablaListadosLocalesComponent,
+    TablaListadosMovimientosComponent,
+    AltaLocalComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatIconModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     MatCardModule,
-    MatSelectModule,
-    MaterialFileInputModule,
+    MatCheckboxModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    MaterialFileInputModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     AngularFirestore,
+    AngularFireStorage,
+    AngularFireAuth,
     AuthService,
-    UsuarioService
+    UsuarioService,
+    FormBuilder,
+    ProductoService,
+    LocalService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

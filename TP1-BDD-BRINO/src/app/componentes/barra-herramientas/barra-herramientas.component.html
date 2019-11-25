@@ -1,0 +1,107 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav class="sidenav-menu" mode="side" opened>
+      <button
+        class="cerrar-sesion"
+        mat-raised-button
+        (click)="cerrarSesion()"
+        color="warn"
+      >
+        Cerrar sesion
+      </button>
+      <img class="imagen" [src]="foto" />
+      <p>{{ nomApe }}</p>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Usuario
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('listarusuarios')"
+          >
+            Lista
+          </button>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Producto
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button
+            *ngIf="rol == 'Administrador'"
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('altaproducto')"
+          >
+            Alta
+          </button>
+          <button
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('listaproductos')"
+          >
+            Lista
+          </button>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Local
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button
+            *ngIf="rol == 'Administrador'"
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('altalocal')"
+          >
+            Alta
+          </button>
+          <button
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('listarlocales')"
+          >
+            Lista
+          </button>
+        </mat-expansion-panel>
+        <mat-expansion-panel *ngIf="rol == 'Administrador'">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Movimientos
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button
+            mat-button
+            color="accent"
+            (click)="asignarTipoBoton('listarmovimientos')"
+          >
+            Lista
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-sidenav>
+  
+    <mat-sidenav-content class="sidenav-contenedor">
+      <ng-container [ngSwitch]="tipoBoton">
+        <app-tabla-listados-usuarios *ngSwitchCase="'listarusuarios'" [rol]="rol">
+        </app-tabla-listados-usuarios>
+        <app-tabla-listados-productos *ngSwitchCase="'listaproductos'" [rol]="rol">
+        </app-tabla-listados-productos>
+        <app-alta-producto *ngSwitchCase="'altaproducto'"> </app-alta-producto>
+        <app-tabla-listados-locales *ngSwitchCase="'listarlocales'" [rol]="rol">
+        </app-tabla-listados-locales>
+        <app-alta-local *ngSwitchCase="'altalocal'"></app-alta-local>
+        <app-tabla-listados-movimientos
+          *ngSwitchCase="'listarmovimientos'"
+          [rol]="rol"
+        >
+        </app-tabla-listados-movimientos>
+        <p *ngSwitchDefault>Nada seleccionado</p>
+      </ng-container>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

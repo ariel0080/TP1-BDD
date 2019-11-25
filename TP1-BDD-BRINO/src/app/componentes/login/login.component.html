@@ -1,0 +1,55 @@
+<app-barra-titulo></app-barra-titulo>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Ingresar
+    </mat-card-title>
+  </mat-card-header>
+  <form [formGroup]="usuarioForm" (ngSubmit)="ingresar()">
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            name="email"
+            placeholder="Ingrese email"
+          />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            name="password"
+            placeholder="Ingrese password"
+          />
+          <mat-icon matSuffix>vpn_key</mat-icon>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="submit" color="primary">
+        Ingresar
+      </button>
+      <button mat-raised-button (click)="registrarse()" color="accent">
+        Registrarse
+      </button>
+    </mat-card-actions>
+  </form>
+  <mat-divider></mat-divider>
+  <mat-card-footer>
+    <button mat-raised-button (click)="cargarUsuario()">
+      Usuario
+    </button>
+    <button mat-raised-button (click)="cargarAdministrador()">
+      Administrador
+    </button>
+  </mat-card-footer>
+</mat-card>

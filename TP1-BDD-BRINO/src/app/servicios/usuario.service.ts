@@ -1,59 +1,52 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Usuario } from '../clases/usuario';
-//import { Cliente } from '../clases/cliente';
-//import { Supervisor } from '../clases/supervisor';
-//import { Empleado } from '../clases/empleado';
-//import { AngularFireAuth } from '@angular/fire/auth';
-//import { Observable, of } from 'rxjs';
-//import { switchMap, map } from 'rxjs/operators';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UsuarioI } from '../interfaces/usuario-i';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
- // usuario$: Observable<any>;
+  usuarios: AngularFirestoreCollection;
 
-  constructor(
-    private angularFireStore: AngularFirestore,
-    //private angularFireAuth: AngularFireAuth
-  ) {
-    //this.usuario$ = this.buscarUsuarioFirebase();
+  constructor(private af: AngularFirestore, private afs: AngularFireStorage) {
+    this.usuarios = this.af.collection<UsuarioI>('usuarios');
   }
 
-  persistirUsuario(usuario: Usuario) {
-    this.angularFireStore
-      .collection('/usuarios').add(Object.assign({}, JSON.parse(JSON.stringify(usuario))));
+  persistirUsuario(usuario: UsuarioI, uid: string) {
+    this.usuarios.doc(uid).set(usuario);
   }
 
-  /*private buscarUsuarioFirebase(): Observable<any> {
-    const salida = this.angularFireAuth.authState.pipe(
-      switchMap(usuario => {
-        if (usuario) {
-          return this.angularFireStore
-            .doc<any>(`usuarios/${usuario.uid}`)
-            .valueChanges();
-        } else {
-          return of(null);
-        }
-      }),
-      map(usuario => {
-        if (usuario) {
-          switch (usuario.rol) {
-            case 'cliente':
-              return usuario as Observable<Cliente>;
-            case 'supervisor':
-              return usuario as Observable<Supervisor>;
-            case 'empleado':
-              return usuario as Observable<Empleado>;
-          }
-        }
+  deshabilitarUsuario(uid: string) {
+    this.usuarios.doc(uid).update({activo: false});
+  }
+
+  subirFoto(foto: File, uid: string) {
+    const pathFoto = `imagenes/${uid}`;
+    const tarea = this.afs.upload(pathFoto, foto);
+    tarea.then(() => {
+      this.afs
+        .ref(pathFoto)
+        .getDownloadURL()
+        .subscribe(url => {
+          this.usuarios.doc(uid).update({
+            foto: url
+          });
+        });
+    });
+  }
+
+  traerUsuarios(): Observable<any[]> {
+    return this.usuarios.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const datos = action.payload.doc.data() as UsuarioI;
+          const id = action.payload.doc.id;
+          return { id, ...datos };
+        });
       })
     );
-    return salida;
   }
-
-  traerUsuarioActivo(): Observable<any> {
-    return this.usuario$;
-  }*/
 }

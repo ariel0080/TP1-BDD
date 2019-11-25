@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/clases/usuario';
-import { UsuarioService } from 'src/app/servicios/usuario.service';
-import { Validators, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Rol } from 'src/app/enums/rol.enum';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-alta-usuario',
@@ -9,41 +10,41 @@ import { Validators, FormControl } from '@angular/forms';
   styleUrls: ['./alta-usuario.component.css']
 })
 export class AltaUsuarioComponent implements OnInit {
+  public usuarioForm: FormGroup;
 
-  correo = new FormControl('', [Validators.required, Validators.email]);
-
-  public nombre: string;
-  public apellido: string;
-  public foto: string;
-  public activo: boolean;
-  public email: string;
-  public rol: string;
-  public password: string;
-
-  constructor(private userService: UsuarioService) { }
-
-
-
-  ngOnInit() {
+  constructor(private as: AuthService, private router: Router) {
+    this.usuarioForm = new FormGroup({
+      nombre: new FormControl(''),
+      apellido: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      foto: new FormControl('')
+    });
   }
 
-  public ver(){
-    console.table(this);
+  guardarForm() {
+    const usuarioTmp = {
+      nombre: this.usuarioForm.value.nombre,
+      apellido: this.usuarioForm.value.apellido,
+      email: this.usuarioForm.value.email,
+      foto: '',
+      activo: true,
+      rol: Rol.Usuario
+    };
+
+    this.as.registracion(
+      usuarioTmp,
+      this.usuarioForm.value.password,
+      this.usuarioForm.value.foto.files
+    );
+
+    this.usuarioForm.reset();
   }
 
-  altaUsuario() {
-    const userTmp = new Usuario(this.nombre, this.apellido, 'foto', true, this.email, 'admin');
-    this.userService.persistirUsuario(userTmp);
-
-    //console.log(this.nombre, this.apellido,this.email, this.password);
-
-
+  cancelarForm() {
+    this.usuarioForm.reset();
+    this.router.navigate(['/login']);
   }
 
-getErrorMessage() {
-      return this.correo.hasError('required') ? 'You must enter a value' :
-          this.correo.hasError('correo') ? 'Not a valid email' :
-              '';
-    }
-
+  ngOnInit() {}
 }

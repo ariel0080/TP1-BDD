@@ -1,0 +1,44 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Alta de producto
+      </mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="localForm" (ngSubmit)="guardarForm()">
+      <mat-card-content>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="nombre"
+              name="nombre"
+              placeholder="Ingrese el nombre"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Direccion</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="direccion"
+                name="direccion"
+                placeholder="Ingrese la direccion"
+              />
+            </mat-form-field>
+          </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary">
+          Aceptar
+        </button>
+        <button mat-raised-button (click)="cancelarForm()" color="warn">
+          Cancelar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  

@@ -1,1 +1,71 @@
-<p>alta-producto works!</p>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Alta de producto
+      </mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="productoForm" (ngSubmit)="guardarForm()">
+      <mat-card-content>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="nombre"
+              name="nombre"
+              placeholder="Ingrese el nombre"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Costo</mat-label>
+            <input
+              matInput
+              type="number"
+              min="0"
+              formControlName="costo"
+              name="costo"
+              placeholder="Ingrese el costo"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <textarea
+              matInput
+              rows="4"
+              cols="50"
+              formControlName="descripcion"
+              name="descripcion"
+              placeholder="Ingrese la descripcion"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Observaciones</mat-label>
+            <textarea
+              matInput
+              rows="4"
+              cols="50"
+              formControlName="observaciones"
+              name="observaciones"
+              placeholder="Ingrese una observacion"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary">
+          Aceptar
+        </button>
+        <button mat-raised-button (click)="cancelarForm()" color="warn">
+          Cancelar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  
