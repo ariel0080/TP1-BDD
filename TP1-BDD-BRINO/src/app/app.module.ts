@@ -38,6 +38,7 @@ import { TablaListadosMovimientosComponent } from './componentes/tabla-listados-
 import { ProductoService } from './servicios/producto.service';
 import { AltaLocalComponent } from './componentes/alta-local/alta-local.component';
 import { LocalService } from './servicios/local.service';
+import { MovimientoService } from './servicios/movimiento.service';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { LocalService } from './servicios/local.service';
     UsuarioService,
     FormBuilder,
     ProductoService,
-    LocalService
+    LocalService,
+    MovimientoService
   ],
   bootstrap: [AppComponent]
 })

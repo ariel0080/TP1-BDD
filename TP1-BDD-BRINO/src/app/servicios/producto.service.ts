@@ -4,6 +4,12 @@ import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { MovimientoService } from './movimiento.service';
+import { TipoMovimiento } from '../enums/tipo-movimiento.enum';
+import { LocalService } from './local.service';
+import { MovimientoI } from '../interfaces/movimiento-i';
+import { AuthService } from './auth.service';
+import { getLocaleFirstDayOfWeek } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +18,11 @@ export class ProductoService {
   productos: AngularFirestoreCollection;
 
 
-  constructor(private af: AngularFirestore, private afs: AngularFireStorage) {
+  constructor(private af: AngularFirestore,
+    private afs: AngularFireStorage,
+    private ms: MovimientoService,
+     private ls: LocalService,
+     private as: AuthService) {
     this.productos = this.af.collection<ProductoI>('productos');
   }
 
@@ -21,6 +31,25 @@ export class ProductoService {
       if(foto){
         this.subirFoto(foto[0], doc.id);
       }
+
+      this.ls.traerLocales().subscribe(locales => {
+        locales.forEach(localFE => {
+          let email ="";
+
+          this.as.traerUsuarioActivo().subscribe(usuarioAct => {email = usuarioAct.email})
+
+          const movimientoTmp = {
+            tipo: TipoMovimiento.agregar,
+            usuario:  email,
+            producto: producto.nombre,
+            local: localFE,
+            cantidad: 0
+          }
+
+          this.ms.persistirMovimiento(movimientoTmp);
+        })
+      })
+
     });
 
   }
