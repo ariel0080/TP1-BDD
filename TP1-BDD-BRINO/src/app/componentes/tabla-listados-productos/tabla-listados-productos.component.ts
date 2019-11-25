@@ -31,7 +31,7 @@ export class TablaListadosProductosComponent implements OnInit {
   lista$: Observable<any[]>;
   columnasTabla: string[];
   datosTabla: MatTableDataSource<any>;
-  productoExpandido: ['descripcion', 'observaciones'] | null;
+  productoExpandido: ['foto','descripcion', 'observaciones'] | null;
 
   constructor(private ps: ProductoService) {}
 

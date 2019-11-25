@@ -1,6 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
+mat-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
 
+mat-card-header {
+  display: flex !important;
+  justify-content: center;
+}
+
+mat-card-actions {
+  display: flex !important;
+  justify-content: center;
+}
+
+mat-card-footer {
+  display: flex !important;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-toolbar-row {
+  display: flex !important;
+  justify-content: center;
+}
+
+button {
+  width: 50%;
+}
+
+table {
+  width: 100%;
+}
+
+.cerrar-sesion {
+  width: 100% !important;
+}
+
+.sidenav-container {
+  display: flex;
+  justify-content: center;
+  height: 95%;
+}
+
+.sidenav-menu {
+  width: 10%;
+}
+
+.sidenav-contenedor {
+  width: 90%;
+}
+
+.titulo {
+  display: flex;
+  background-color: steelblue;
+  justify-content: center;
+  height: 5%;
+}
+
+.imagen {
+  width: auto;
+  height: 12%;
+}
+
+tr.detalle-fila {
+  height: 0;
+}
+
+tr.producto-fila:not(.fila-expandida):hover {
+  background: #777;
+}
+
+tr.producto-fila:not(.fila-expandida):active {
+  background: #efefef;
+}
+
+.producto-fila td {
+  border-bottom-width: 0;
+}
+
+.expandir-detalle {
+  overflow: hidden;
+  display: flex;
+}
+
+.producto-descripcion-observaciones {
+  padding: 16px;
+  text-align: center;
+}

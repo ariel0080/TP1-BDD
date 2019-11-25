@@ -2,24 +2,24 @@
     <input matInput placeholder="Filtros" />
     <!--(keyup)="applyFilter($event.target.value)"-->
   </mat-form-field>
-  
+
   <div>
     <table mat-table [dataSource]="datosTabla" multiTemplateDataRows>
       <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
         <td mat-cell *matCellDef="let producto">{{ producto.nombre }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="costo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Costo</th>
         <td mat-cell *matCellDef="let producto">$ {{ producto.costo }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="cantidad">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
         <td mat-cell *matCellDef="let producto">{{ producto.cantidad }}</td>
       </ng-container>
-  
+
       <ng-container matColumnDef="fechaCreacion">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Fecha de creacion
@@ -29,12 +29,12 @@
           Hora: {{ producto.fechaCreacion.toMillis() | date: 'HH:mm' }}
         </td>
       </ng-container>
-  
+
       <ng-container matColumnDef="activo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Activo</th>
         <td mat-cell *matCellDef="let producto">{{ producto.activo }}</td>
       </ng-container>
-  
+
       <ng-container *ngIf="rol == 'Administrador'" matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
         <td mat-cell *matCellDef="let producto">
@@ -48,7 +48,7 @@
           </button>
         </td>
       </ng-container>
-  
+
       <ng-container matColumnDef="detalle">
         <td
           mat-cell
@@ -58,13 +58,16 @@
         <div class="expandir-detalle"
         [@expandirDetalle]="producto == productoExpandido ? 'expandir' : 'colapsar'">
             <div class="producto-descripcion-observaciones">
+              <div><img [src]= "producto.foto" height="30" width="30"></div>
               <div><span>{{ producto.descripcion }}</span></div>
               <div><span>{{ producto.observaciones }}</span></div>
+
+
             </div>
           </div>
         </td>
       </ng-container>
-  
+
       <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
       <tr
         mat-row
@@ -79,7 +82,7 @@
         class="detalle-fila"
       ></tr>
     </table>
-  
+
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </div>
-  
+
