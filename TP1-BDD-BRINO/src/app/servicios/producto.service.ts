@@ -9,7 +9,7 @@ import { TipoMovimiento } from '../enums/tipo-movimiento.enum';
 import { LocalService } from './local.service';
 import { MovimientoI } from '../interfaces/movimiento-i';
 import { AuthService } from './auth.service';
-import { getLocaleFirstDayOfWeek } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'

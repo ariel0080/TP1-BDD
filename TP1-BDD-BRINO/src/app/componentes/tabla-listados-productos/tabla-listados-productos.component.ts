@@ -64,4 +64,7 @@ export class TablaListadosProductosComponent implements OnInit {
   deshabilitarProducto(id: string) {
     this.ps.deshabilitarProducto(id);
   }
+
+
+
 }
