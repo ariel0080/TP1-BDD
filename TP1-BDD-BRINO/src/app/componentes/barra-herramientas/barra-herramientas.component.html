@@ -1,87 +1,48 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav class="sidenav-menu" mode="side" opened>
-      <button
-        class="cerrar-sesion"
-        mat-raised-button
-        (click)="cerrarSesion()"
-        color="warn"
-      >
+      <button    class="cerrar-sesion"    mat-raised-button     (click)="cerrarSesion()"    color="warn">
         Cerrar sesion
       </button>
       <img class="imagen" [src]="foto" />
       <p>{{ nomApe }}</p>
       <mat-accordion>
         <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Usuarios
-            </mat-panel-title>
+          <mat-expansion-panel-header *ngIf="rol == 'Administrador'">
+
+            <mat-panel-title>Usuarios</mat-panel-title>
+
           </mat-expansion-panel-header>
-          <button
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('listarusuarios')"
-          >
-            Lista
-          </button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Lista</button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Movimientos</button>
         </mat-expansion-panel>
+
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Productos
-            </mat-panel-title>
+            <mat-panel-title>Productos</mat-panel-title>
+
           </mat-expansion-panel-header>
-          <button
-            *ngIf="rol == 'Administrador'"
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('altaproducto')"
-          >
-            Alta
-          </button>
-          <button
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('listaproductos')"
-          >
-            Lista
-          </button>
+          <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('altaproducto')">Alta</button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listaproductos')">Lista</button>
+          <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Movimientos</button>
         </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header *ngIf="rol == 'Administrador'">
+            <mat-panel-title>Locales</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <button mat-button color="primary" (click)="asignarTipoBoton('altalocal')">Alta</button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Lista</button>
+        </mat-expansion-panel>
+
         <mat-expansion-panel>
           <mat-expansion-panel-header>
-            <mat-panel-title>
-              Locales
-            </mat-panel-title>
+            <mat-panel-title>Movimientos</mat-panel-title>
           </mat-expansion-panel-header>
-          <button
-            *ngIf="rol == 'Administrador'"
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('altalocal')"
-          >
-            Alta
-          </button>
-          <button
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('listarlocales')"
-          >
-            Lista
-          </button>
-        </mat-expansion-panel>
-        <mat-expansion-panel *ngIf="rol == 'Administrador'">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Movimientos
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <button
-            mat-button
-            color="accent"
-            (click)="asignarTipoBoton('listarmovimientos')"
-          >
-            Lista
-          </button>
+
+          <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('listarmovimientos')">Lista</button>
+          <button *ngIf="rol != 'Administrador'"mat-button color="primary" (click)="asignarTipoBoton('listarmovimientos')">Lista</button>
+          
         </mat-expansion-panel>
       </mat-accordion>
     </mat-sidenav>

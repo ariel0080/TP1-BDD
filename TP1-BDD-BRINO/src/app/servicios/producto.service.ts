@@ -58,6 +58,10 @@ export class ProductoService {
     this.productos.doc(uid).update({activo: false});
   }
 
+  habilitarProducto(uid: string) {
+    this.productos.doc(uid).update({activo: true});
+  }
+
 
   traerProductos(): Observable<any[]> {
     return this.productos.snapshotChanges().pipe(
