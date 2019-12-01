@@ -3,6 +3,7 @@ export interface ProductoI {
     costo: number;
     cantidad: number;
     fechaCreacion: Date;
+    local: string;
     descripcion: string;
     observaciones: string;
     foto: string;

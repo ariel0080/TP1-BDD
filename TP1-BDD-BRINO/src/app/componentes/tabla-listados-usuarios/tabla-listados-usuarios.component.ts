@@ -25,12 +25,13 @@ export class TablaListadosUsuariosComponent implements OnInit {
         'nombre',
         'apellido',
         'email',
+        'local',
         'activo',
         'rol',
         'id'
       ];
     } else {
-      this.columnasTabla = ['nombre', 'apellido', 'email', 'activo', 'rol'];
+      this.columnasTabla = ['nombre', 'apellido', 'email', 'local','activo', 'rol'];
     }
 
     this.lista$.subscribe(datos => {

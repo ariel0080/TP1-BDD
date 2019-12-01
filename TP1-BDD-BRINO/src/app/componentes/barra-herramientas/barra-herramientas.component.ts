@@ -12,6 +12,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class BarraHerramientasComponent implements OnInit {
   foto: string;
   rol: string;
+  local:string;
   nomApe: string;
   tipoBoton: string;
   usuario$: Observable<UsuarioI>;
@@ -23,6 +24,7 @@ export class BarraHerramientasComponent implements OnInit {
       this.foto = usuario.foto;
       this.rol = usuario.rol;
       this.nomApe = usuario.nombre + ' ' + usuario.apellido;
+      this.local = usuario.local;
     });
   }
 

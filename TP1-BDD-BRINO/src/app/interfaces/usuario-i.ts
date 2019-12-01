@@ -4,7 +4,7 @@ export interface UsuarioI {
   nombre: string;
   apellido: string;
   email: string;
-  //local: string;
+  local: string;
   foto: string;
   activo: boolean;
   rol: Rol;

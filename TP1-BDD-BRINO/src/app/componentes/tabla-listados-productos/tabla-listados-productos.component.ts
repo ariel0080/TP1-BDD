@@ -9,6 +9,9 @@ import {
   transition,
   animate
 } from '@angular/animations';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { UsuarioI } from 'src/app/interfaces/usuario-i';
 
 @Component({
   selector: 'app-tabla-listados-productos',
@@ -27,16 +30,18 @@ import {
 })
 export class TablaListadosProductosComponent implements OnInit {
   @Input() rol: string;
+  local:string;
 
   lista$: Observable<any[]>;
   columnasTabla: string[];
   datosTabla: MatTableDataSource<any>;
   productoExpandido: ['foto','descripcion', 'observaciones'] | null;
-  
+  usuarioActivo: Observable<any>;
 
-  constructor(private ps: ProductoService) {}
+  constructor(private ps: ProductoService, private us: AuthService) {}
 
   ngOnInit() {
+    
     this.lista$ = this.ps.traerProductos();
     if (this.rol === 'Administrador') {
       this.columnasTabla = [
@@ -44,8 +49,8 @@ export class TablaListadosProductosComponent implements OnInit {
         'costo',
         'cantidad',
         'stock',
+        'local',
         'fechaCreacion',
-       // 'det',
         'activo',
         'id'
       ];
@@ -55,16 +60,43 @@ export class TablaListadosProductosComponent implements OnInit {
         'costo',
         'cantidad',
         'stock',
+        'local',
         'fechaCreacion',
-        //'det',
         'activo'
       ];
     }
-
+  
+    if (this.rol === 'Administrador') {
     this.lista$.subscribe(datos => {
-      this.datosTabla = new MatTableDataSource(datos);
+    this.datosTabla = new MatTableDataSource(datos);
+    console.table(this.datosTabla);
+    //this.datosTabla = this.datosTabla._filterData(local: )
     });
+  }else{
+    this.usuarioActivo = this.us.traerUsuarioActivo();
+    this.usuarioActivo.subscribe(usuario => {this.local = usuario.local;
+      console.log("USUARIO ACTIVO local---->> ",usuario.local);
+
+      this.lista$.subscribe(datos => {
+      this.datosTabla = new MatTableDataSource(datos);
+      this.datosTabla.filter = usuario.local;
+    });
+    });
+    
+    
+
+    
+
+    
+
   }
+}
+
+
+
+
+
+
 
   deshabilitarProducto(id: string) {
     this.ps.deshabilitarProducto(id);

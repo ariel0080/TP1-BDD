@@ -5,6 +5,7 @@
       </button>
       <img class="imagen" [src]="foto" />
       <p>{{ nomApe }}</p>
+      <p *ngIf="rol != 'Administrador'">{{ local }}</p>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header *ngIf="rol == 'Administrador'">

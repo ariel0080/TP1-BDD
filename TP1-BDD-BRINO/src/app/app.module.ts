@@ -39,6 +39,7 @@ import { ProductoService } from './servicios/producto.service';
 import { AltaLocalComponent } from './componentes/alta-local/alta-local.component';
 import { LocalService } from './servicios/local.service';
 import { MovimientoService } from './servicios/movimiento.service';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { MovimientoService } from './servicios/movimiento.service';
     MatInputModule,
     MatButtonModule,
     MaterialFileInputModule,
+    MatSelectModule,
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,

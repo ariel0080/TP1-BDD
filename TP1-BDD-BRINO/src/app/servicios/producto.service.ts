@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { ProductoI } from '../interfaces/producto-i';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -15,7 +15,10 @@ import { UsuarioI } from '../interfaces/usuario-i';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductoService {
+  @Input() rol: string;
+
   productos: AngularFirestoreCollection;
   usuario$: Observable<UsuarioI>;
 
@@ -89,6 +92,7 @@ export class ProductoService {
 
 
   traerProductos(): Observable<any[]> {
+    
     return this.productos.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {
