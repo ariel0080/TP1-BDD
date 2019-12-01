@@ -9,6 +9,7 @@ import { TipoMovimiento } from '../enums/tipo-movimiento.enum';
 import { LocalService } from './local.service';
 import { MovimientoI } from '../interfaces/movimiento-i';
 import { AuthService } from './auth.service';
+import { UsuarioI } from '../interfaces/usuario-i';
 
 
 @Injectable({
@@ -16,12 +17,9 @@ import { AuthService } from './auth.service';
 })
 export class ProductoService {
   productos: AngularFirestoreCollection;
+  usuario$: Observable<UsuarioI>;
 
-
-  constructor(private af: AngularFirestore,
-    private afs: AngularFireStorage,
-    private ms: MovimientoService,
-     private ls: LocalService,
+  constructor(private af: AngularFirestore, private afs: AngularFireStorage, private ms: MovimientoService, private ls: LocalService,
      private as: AuthService) {
     this.productos = this.af.collection<ProductoI>('productos');
   }
@@ -60,6 +58,33 @@ export class ProductoService {
 
   habilitarProducto(uid: string) {
     this.productos.doc(uid).update({activo: true});
+  }
+
+
+
+  agregarProducto(uid: string) {
+    
+    
+      this.productos.doc(uid).ref.get().then(
+        product => {let cant: number;
+                    cant = product.get('cantidad');
+                    cant = cant+1;
+                    this.productos.doc(uid).update({ cantidad: cant });
+
+        })
+    }
+
+  removerProducto(uid: string) {
+    this.productos.doc(uid).ref.get().then(
+      product => {let cant: number;
+                  cant = product.get('cantidad');
+                  if(cant==0){}
+                  else{
+                  cant = cant-1;
+                  this.productos.doc(uid).update({ cantidad: cant });
+                 }
+
+      })
   }
 
 

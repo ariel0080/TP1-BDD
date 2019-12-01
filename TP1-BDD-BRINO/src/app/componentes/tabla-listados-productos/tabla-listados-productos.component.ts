@@ -20,7 +20,7 @@ import {
       state('expandir', style({ height: '*' })),
       transition(
         'expandir <=> colapsar',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+        animate('2250ms cubic-bezier(0.4, 0.0, 0.2, 1)')
       )
     ])
   ]
@@ -32,6 +32,7 @@ export class TablaListadosProductosComponent implements OnInit {
   columnasTabla: string[];
   datosTabla: MatTableDataSource<any>;
   productoExpandido: ['foto','descripcion', 'observaciones'] | null;
+  
 
   constructor(private ps: ProductoService) {}
 
@@ -42,7 +43,9 @@ export class TablaListadosProductosComponent implements OnInit {
         'nombre',
         'costo',
         'cantidad',
+        'stock',
         'fechaCreacion',
+       // 'det',
         'activo',
         'id'
       ];
@@ -51,7 +54,9 @@ export class TablaListadosProductosComponent implements OnInit {
         'nombre',
         'costo',
         'cantidad',
+        'stock',
         'fechaCreacion',
+        //'det',
         'activo'
       ];
     }
@@ -67,6 +72,14 @@ export class TablaListadosProductosComponent implements OnInit {
 
   habilitarProducto(id: string) {
     this.ps.habilitarProducto(id);
+  }
+
+  agregarProducto(id: string) {
+    this.ps.agregarProducto(id);
+  }
+
+  removerProducto(id: string) {
+    this.ps.removerProducto(id);
   }
 
 
