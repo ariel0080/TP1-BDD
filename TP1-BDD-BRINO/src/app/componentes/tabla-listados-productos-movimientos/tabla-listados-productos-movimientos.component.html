@@ -1,0 +1,64 @@
+<form [formGroup]="productoForm3" (ngSubmit)="filtro2()">
+  <mat-form-field>
+        <mat-label>Productos</mat-label>
+
+        <mat-select name="filtro" formControlName="filtro">
+            <mat-option *ngFor="let loc of arrayUsers" [value]=loc>
+                {{ loc }}
+            </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Local</mat-label>
+
+        <mat-select name="local" formControlName="local">
+            <mat-option *ngFor="let loc1 of arrayLocales" [value]=loc1>
+                {{ loc1 }}
+            </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+    <button mat-button color="primary" type="submit" >FILTRAR</button>
+</form>
+
+
+  <div >
+    <table mat-table [dataSource]="datosTabla" matSort>
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+        <td mat-cell *matCellDef="let movimientos">
+            Dia: {{movimientos.fecha.toMillis() | date: 'dd/MM/yyyy' }} -
+            Hora: {{ movimientos.fecha.toMillis() | date: 'HH:mm' }}
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="local">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Local</th>
+        <td mat-cell *matCellDef="let movimientos">{{ movimientos.local }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="producto">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>producto</th>
+        <td mat-cell *matCellDef="let movimientos">{{ movimientos.producto }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+          <td mat-cell *matCellDef="let movimientos">{{ movimientos.tipo }}</td>
+        </ng-container>
+
+         <ng-container matColumnDef="usuario">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>usuario</th>
+        <td mat-cell *matCellDef="let movimientos">{{ movimientos.usuario }}</td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="columnasTabla"></tr>
+      <tr mat-row *matRowDef="let columnas; columns: columnasTabla"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>

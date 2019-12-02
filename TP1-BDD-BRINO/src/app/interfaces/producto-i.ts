@@ -8,4 +8,5 @@ export interface ProductoI {
     observaciones: string;
     foto: string;
     activo: boolean;
+    id?: string;
   }

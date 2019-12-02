@@ -17,7 +17,7 @@ export class TablaListadosUsuariosMovimientosComponent implements OnInit {
   lista$: Observable<any[]>;
   columnasTabla: string[];
   datosTabla: MatTableDataSource<any>;
-  idU:string;
+  idU: string;
   userColection: AngularFirestoreCollection;
   public arrayUsers: Array<string>
   usertmp: UsuarioI;
@@ -47,23 +47,23 @@ export class TablaListadosUsuariosMovimientosComponent implements OnInit {
 
     this.arrayUsers = new Array<string>();
     this.us.traerUsuarios().subscribe(usuarios => {
-      
+
                                                 usuarios.forEach(element => {this.usertmp = JSON.parse(JSON.stringify(element));
-                                                this.arrayUsers.push(this.usertmp.email);   
-                                                //console.log("array de usuarios email ",this.arrayUsers,"id que trae: ",this.idU);                                               
+                                                this.arrayUsers.push(this.usertmp.email);
+                                                //console.log("array de usuarios email ",this.arrayUsers,"id que trae: ",this.idU);
                                                 if(this.usertmp.email ===  this.productoForm2.value.filtro){this.idU = this.usertmp.id;}})})
-   
+
   }
-  
+
 
   ngOnInit() {}
 
   filtro(){
-   
+
     this.us.traerUsuarios().subscribe(usuarios => {
       console.log("cuantosssss",usuarios.length);
       usuarios.forEach(element => {this.usertmp = JSON.parse(JSON.stringify(element));
-                                                    
+
       if(this.usertmp.email ===  this.productoForm2.value.filtro){this.idU = this.usertmp.id}})})
       console.log ("apretaste:", this.productoForm2.value.filtro,"usertmpemail",this.usertmp.email);
       console.log("array de usuarios email ",this.arrayUsers,"id que trae: ",this.idU);
@@ -83,8 +83,8 @@ export class TablaListadosUsuariosMovimientosComponent implements OnInit {
 
     this.lista$.subscribe(datos => {this.datosTabla = new MatTableDataSource(datos);});
     this.datosTabla.filter = this.productoForm2.value.filtro;
-  
-  
+
+
 
 
 }

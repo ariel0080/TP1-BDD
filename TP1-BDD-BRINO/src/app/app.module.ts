@@ -41,6 +41,7 @@ import { LocalService } from './servicios/local.service';
 import { MovimientoService } from './servicios/movimiento.service';
 import { MatSelectModule } from '@angular/material';
 import { TablaListadosUsuariosMovimientosComponent } from './componentes/tabla-listados-usuarios-movimientos/tabla-listados-usuarios-movimientos.component';
+import { TablaListadosProductosMovimientosComponent } from './componentes/tabla-listados-productos-movimientos/tabla-listados-productos-movimientos.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { TablaListadosUsuariosMovimientosComponent } from './componentes/tabla-l
     TablaListadosLocalesComponent,
     TablaListadosMovimientosComponent,
     AltaLocalComponent,
-    TablaListadosUsuariosMovimientosComponent
+    TablaListadosUsuariosMovimientosComponent,
+    TablaListadosProductosMovimientosComponent
   ],
   imports: [
     BrowserModule,

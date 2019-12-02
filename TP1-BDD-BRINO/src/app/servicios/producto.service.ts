@@ -21,7 +21,7 @@ export class ProductoService {
 
   productos: AngularFirestoreCollection;
   usuario$: Observable<UsuarioI>;
-  
+
 
   constructor(private af: AngularFirestore, private afs: AngularFireStorage, private ms: MovimientoService, private ls: LocalService,
      private as: AuthService) {
@@ -29,10 +29,13 @@ export class ProductoService {
   }
 
   persistirProducto(producto: ProductoI, foto: Array<File>) {
-    this.productos.add(producto).then(doc =>{
+
+    this.productos.add(producto).then(doc => {
       if(foto){
         this.subirFoto(foto[0], doc.id);
+        this.productos.doc(doc.id).update({ id: doc.id });
       }
+
 
       this.ls.traerLocales().subscribe(locales => {
         locales.forEach(localFE => {
@@ -60,6 +63,21 @@ export class ProductoService {
     this.productos.doc(uid).update({activo: false});
   }
 
+
+  traerMovimientosUsuarios(uid: string, coleccion:string): Observable<any[]> {
+    return this.af.collection(coleccion).doc(uid).collection('/movimientos', ref => ref.orderBy('fecha', 'desc')).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(action => {
+          const datos = action.payload.doc.data() as MovimientoI;
+          const id = action.payload.doc.id;
+          return { id, ...datos };
+        });
+      })
+    );
+  }
+
+
+
   habilitarProducto(uid: string) {
     this.productos.doc(uid).update({activo: true});
   }
@@ -68,11 +86,11 @@ export class ProductoService {
     return this.productos.doc(uid).get();
   }
 
-  
+
 
   agregarProducto(uid: string) {
-    
-    
+
+
       this.productos.doc(uid).ref.get().then(
         product => {let cant: number;
                     cant = product.get('cantidad');
@@ -97,7 +115,7 @@ export class ProductoService {
 
 
   traerProductos(): Observable<any[]> {
-    
+
     return this.productos.snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {
