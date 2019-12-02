@@ -45,11 +45,7 @@ export class AltaProductoComponent implements OnInit {
     datos.forEach(element => {
     this.tmp = JSON.parse(JSON.stringify(element));
     this.arrayLocales.push(this.tmp.nombre);
-    //console.log(this.arrayLocales);
-    //this.arrayLocales.forEach(k => {this.locs = new SelLoc(k,k);
-    //                                console.log(this.locs);
-    //                              }
-    //                         )
+    
                              }
                 )                   })
   }
@@ -74,8 +70,8 @@ export class AltaProductoComponent implements OnInit {
     //--------------------dasdassad-asdasdasdasd-asdasdasdas-dasdasd--
 
     
-    
-   // this.pm.persistirMovimiento(movimientoProductoTmp);
+   ///---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
+   
 
 
 

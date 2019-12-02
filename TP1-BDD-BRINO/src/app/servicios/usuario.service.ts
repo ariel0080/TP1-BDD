@@ -19,7 +19,9 @@ export class UsuarioService {
   }
 
   persistirUsuario(usuario: UsuarioI, uid: string) {
+    usuario.id = uid;
     this.usuarios.doc(uid).set(usuario);
+
   }
 
   deshabilitarUsuario(uid: string) {

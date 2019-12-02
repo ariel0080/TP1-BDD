@@ -34,18 +34,10 @@
 
           <button mat-button color="primary" (click)="asignarTipoBoton('altalocal')">Alta</button>
           <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Lista</button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Movimientos</button>
         </mat-expansion-panel>
 
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Movimientos</mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('listarmovimientos')">Lista</button>
-          <button *ngIf="rol != 'Administrador'"mat-button color="primary" (click)="asignarTipoBoton('listarmovimientos')">Lista</button>
-          
-        </mat-expansion-panel>
-      </mat-accordion>
+        </mat-accordion>
     </mat-sidenav>
   
     <mat-sidenav-content class="sidenav-contenedor">

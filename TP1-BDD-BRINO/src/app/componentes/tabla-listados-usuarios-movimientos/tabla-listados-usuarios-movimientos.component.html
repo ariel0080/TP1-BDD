@@ -1,9 +1,24 @@
-<mat-form-field>
+<!--<mat-form-field>
         <input matInput placeholder="Filtros" />
-        <!--(keyup)="applyFilter($event.target.value)"-->
-      </mat-form-field>
+        <!--(keyup)="applyFilter($event.target.value)"
+      </mat-form-field>-->
+    <form [formGroup]="productoForm2" (ngSubmit)="filtro()">
+      <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            
+            <mat-select name="filtro" formControlName="filtro">
+                <mat-option *ngFor="let loc of arrayUsers" [value]=loc>
+                    {{ loc }}
+                </mat-option>
+                
+            </mat-select> 
+        </mat-form-field>
+
+        <button mat-button color="primary" type="submit" >FILTRAR</button>  
+    </form>
+
       
-      <div>
+      <div >
         <table mat-table [dataSource]="datosTabla" matSort>
           <ng-container matColumnDef="fecha">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
