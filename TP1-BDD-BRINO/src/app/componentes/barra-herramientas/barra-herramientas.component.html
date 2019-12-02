@@ -4,8 +4,8 @@
         Cerrar sesion
       </button>
       <img class="imagen" [src]="foto" />
-      <p>{{ nomApe }}</p>
-      <p *ngIf="rol != 'Administrador'">{{ local }}</p>
+      <p>Usuario: {{ nomApe }}</p>
+      <p *ngIf="rol != 'Administrador'">Local: {{ local }}</p>
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header *ngIf="rol == 'Administrador'">
@@ -14,7 +14,7 @@
 
           </mat-expansion-panel-header>
           <button mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Lista</button>
-          <button mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Movimientos</button>
+          <button mat-button color="primary" (click)="asignarTipoBoton('listaMovUsuarios')">Movimientos</button>
         </mat-expansion-panel>
 
         <mat-expansion-panel>
@@ -54,6 +54,8 @@
         </app-tabla-listados-usuarios>
         <app-tabla-listados-productos *ngSwitchCase="'listaproductos'" [rol]="rol">
         </app-tabla-listados-productos>
+        <app-tabla-listados-usuarios-movimientos *ngSwitchCase="'listaMovUsuarios'" [rol]="rol">
+          </app-tabla-listados-usuarios-movimientos>
         <app-alta-producto *ngSwitchCase="'altaproducto'"> </app-alta-producto>
         <app-tabla-listados-locales *ngSwitchCase="'listarlocales'" [rol]="rol">
         </app-tabla-listados-locales>

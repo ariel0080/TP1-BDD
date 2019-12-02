@@ -4,6 +4,13 @@ import { ProductoService } from 'src/app/servicios/producto.service';
 import { Observable } from 'rxjs';
 import { LocalI } from 'src/app/interfaces/local-i';
 import { LocalService } from 'src/app/servicios/local.service';
+import { MovimientoService } from 'src/app/servicios/movimiento.service';
+import { MovimientoI } from 'src/app/interfaces/movimiento-i';
+import { TipoMovimiento } from 'src/app/enums/tipo-movimiento.enum';
+import { AuthService } from 'src/app/servicios/auth.service';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { ProductoI } from 'src/app/interfaces/producto-i';
 
 @Component({
   selector: 'app-alta-producto',
@@ -15,8 +22,11 @@ export class AltaProductoComponent implements OnInit {
   public locales:Observable<any[]>;
   public arrayLocales: Array<string>
   public tmp:LocalI;
+  public movProd:MovimientoI;
+  usuarioActivo: Observable<any>;
+  productos: AngularFirestoreCollection;
 
-  constructor(private ps: ProductoService, private localService:LocalService) {
+  constructor(private ps: ProductoService,private as: AngularFirestore,  private us: AuthService,private Uss: UsuarioService ,private Ms:MovimientoService, private lS: LocalService) {
     this.productoForm = new FormGroup({
       nombre: new FormControl(''),
       costo: new FormControl(''),
@@ -24,9 +34,12 @@ export class AltaProductoComponent implements OnInit {
       descripcion: new FormControl(''),
       observaciones: new FormControl(''),
       foto: new FormControl('')
+
+      
     });
 
-    this.locales=this.localService.traerLocales();
+    this.productos = this.as.collection<ProductoI>('productos');
+    this.locales=this.lS.traerLocales();
     this.locales.subscribe(datos => {
     this.arrayLocales = new Array<string>();
     datos.forEach(element => {
@@ -42,7 +55,7 @@ export class AltaProductoComponent implements OnInit {
   }
 
   guardarForm() {
-    const productoTmp = {
+      const productoTmp = {
       nombre: this.productoForm.value.nombre,
       costo: this.productoForm.value.costo,
       local: this.productoForm.value.local,
@@ -54,9 +67,23 @@ export class AltaProductoComponent implements OnInit {
       activo: true
     };
 
+      
     this.ps.persistirProducto(productoTmp, this.productoForm.value.foto.files);
 
+    
+    //--------------------dasdassad-asdasdasdasd-asdasdasdas-dasdasd--
+
+    
+    
+   // this.pm.persistirMovimiento(movimientoProductoTmp);
+
+
+
+
+
     this.productoForm.reset();
+
+
   }
 
   cancelarForm() {
@@ -64,4 +91,5 @@ export class AltaProductoComponent implements OnInit {
   }
 
   ngOnInit() {}
+
 }

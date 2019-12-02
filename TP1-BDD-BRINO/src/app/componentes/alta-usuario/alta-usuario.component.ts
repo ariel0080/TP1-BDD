@@ -24,7 +24,7 @@ export class AltaUsuarioComponent implements OnInit {
   public locales:Observable<any[]>;
   public arrayLocales: Array<string>
   public tmp:LocalI;
-  //locs: SelLoc; 
+  
    
 
   constructor(private as: AuthService, private router: Router, private localService:LocalService) {

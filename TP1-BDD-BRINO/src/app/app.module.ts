@@ -40,6 +40,7 @@ import { AltaLocalComponent } from './componentes/alta-local/alta-local.componen
 import { LocalService } from './servicios/local.service';
 import { MovimientoService } from './servicios/movimiento.service';
 import { MatSelectModule } from '@angular/material';
+import { TablaListadosUsuariosMovimientosComponent } from './componentes/tabla-listados-usuarios-movimientos/tabla-listados-usuarios-movimientos.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MatSelectModule } from '@angular/material';
     TablaListadosProductosComponent,
     TablaListadosLocalesComponent,
     TablaListadosMovimientosComponent,
-    AltaLocalComponent
+    AltaLocalComponent,
+    TablaListadosUsuariosMovimientosComponent
   ],
   imports: [
     BrowserModule,

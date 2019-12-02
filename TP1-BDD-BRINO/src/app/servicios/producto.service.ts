@@ -1,8 +1,8 @@
 import { Injectable, Input } from '@angular/core';
 import { ProductoI } from '../interfaces/producto-i';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MovimientoService } from './movimiento.service';
 import { TipoMovimiento } from '../enums/tipo-movimiento.enum';
@@ -21,6 +21,7 @@ export class ProductoService {
 
   productos: AngularFirestoreCollection;
   usuario$: Observable<UsuarioI>;
+  
 
   constructor(private af: AngularFirestore, private afs: AngularFireStorage, private ms: MovimientoService, private ls: LocalService,
      private as: AuthService) {
@@ -47,7 +48,7 @@ export class ProductoService {
             cantidad: 0
           }
 
-          this.ms.persistirMovimiento(movimientoTmp);
+        //  this.ms.persistirMovimiento(movimientoTmp);
         })
       })
 
@@ -63,7 +64,11 @@ export class ProductoService {
     this.productos.doc(uid).update({activo: true});
   }
 
+  traerProductoActual(uid: string) {
+    return this.productos.doc(uid).get();
+  }
 
+  
 
   agregarProducto(uid: string) {
     

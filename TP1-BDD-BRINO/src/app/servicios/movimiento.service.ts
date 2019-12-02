@@ -15,9 +15,17 @@ export class MovimientoService {
     this.movimientos = this.af.collection<MovimientoI>('movimientos');
   }
 
-  persistirMovimiento(movimiento: MovimientoI) {
+  persistirMovimiento(movimiento: MovimientoI, id: string, tipo: string) {
+    const path = `${tipo}/${id}/movimientos`;
+    
+    this.movimientos = this.af.collection<MovimientoI>(path);
+
     this.movimientos.add(movimiento);
   }
+
+  //persistirMovimiento(movimiento: MovimientoI) {
+  //  this.movimientos.add(movimiento);
+  // }
 
   traerMovimientos(): Observable<any[]> {
     return this.movimientos.snapshotChanges().pipe(
