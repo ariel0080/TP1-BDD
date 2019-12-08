@@ -19,9 +19,11 @@ export class AltaLocalComponent implements OnInit {
 
   guardarForm() {
     const localTmp = {
+      id: '',
       nombre: this.localForm.value.nombre,
       direccion: this.localForm.value.direccion,
       activo: true
+
     };
 
     this.ls.persistirLocal(localTmp);

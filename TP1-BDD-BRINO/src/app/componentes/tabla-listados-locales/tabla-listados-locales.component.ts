@@ -15,14 +15,21 @@ export class TablaListadosLocalesComponent implements OnInit {
   columnasTabla: string[];
   datosTabla: MatTableDataSource<any>;
 
+  locMov: boolean = false;
+  localesMovimiento$: Observable<any[]>;
+  movimientosTablaLocales: MatTableDataSource<any>;
+  columnasTablaMov: string[];
+
   constructor(private ls: LocalService) {}
 
   ngOnInit() {
     this.lista$ = this.ls.traerLocales();
     if (this.rol === 'Administrador') {
-      this.columnasTabla = ['nombre', 'direccion', 'activo', 'id'];
+      this.columnasTabla = ['nombre', 'direccion', 'activo', 'movProd','id'];
+      this.columnasTablaMov =['fecha','local','producto','tipo','usuario'];
     } else {
-      this.columnasTabla = ['nombre', 'direccion', 'activo'];
+      this.columnasTabla = ['nombre', 'direccion', 'activo','movProd'];
+      this.columnasTablaMov =['fecha','local','producto','tipo','usuario'];
     }
 
     this.lista$.subscribe(datos => {
@@ -32,5 +39,17 @@ export class TablaListadosLocalesComponent implements OnInit {
 
   deshabilitarLocal(id: string) {
     this.ls.deshabilitarLocal(id);
+  }
+
+  verMovimientosproducto(id: string){
+
+    console.log("apretaste movimientos");
+    this.locMov = true;
+    this.localesMovimiento$ = this.ls.traerMovimientosLocales(id,'locales');
+    this.localesMovimiento$.subscribe(datosMov => {
+    this.movimientosTablaLocales = new MatTableDataSource(datosMov);
+      
+     
+    })
   }
 }

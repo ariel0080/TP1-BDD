@@ -64,7 +64,7 @@ export class ProductoService {
   }
 
 
-  traerMovimientosUsuarios(uid: string, coleccion:string): Observable<any[]> {
+  traerMovimientosProductos(uid: string, coleccion:string): Observable<any[]> {
     return this.af.collection(coleccion).doc(uid).collection('/movimientos', ref => ref.orderBy('fecha', 'desc')).snapshotChanges().pipe(
       map(actions => {
         return actions.map(action => {

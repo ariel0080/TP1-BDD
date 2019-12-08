@@ -84,7 +84,7 @@ export class TablaListadosProductosMovimientosComponent implements OnInit {
       //console.log ("apretaste:", this.productoForm3.value.filtro,"usertmpemail",this.usertmp.email);
       //console.log("array de usuarios email ",this.arrayUsers,"id que trae: ",this.idU);
 
-    this.lista$ = this.us.traerMovimientosUsuarios(this.idU,'productos');
+    this.lista$ = this.us.traerMovimientosProductos(this.idU,'productos');
     if (this.rol === 'Administrador') {
       this.columnasTabla = [
         'fecha',

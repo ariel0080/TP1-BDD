@@ -14,7 +14,7 @@
 
           </mat-expansion-panel-header>
           <button mat-button color="primary" (click)="asignarTipoBoton('listarusuarios')">Lista</button>
-          <button mat-button color="primary" (click)="asignarTipoBoton('listaMovUsuarios')">Movimientos</button>
+          <!-- <button mat-button color="primary" (click)="asignarTipoBoton('listaMovUsuarios')">Movimientos</button> -->
         </mat-expansion-panel>
 
         <mat-expansion-panel>
@@ -24,7 +24,7 @@
           </mat-expansion-panel-header>
           <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('altaproducto')">Alta</button>
           <button mat-button color="primary" (click)="asignarTipoBoton('listaproductos')">Lista</button>
-          <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('lmp')">Movimientos</button>
+          <!-- <button *ngIf="rol == 'Administrador'" mat-button color="primary" (click)="asignarTipoBoton('lmp')">Movimientos</button>-->
         </mat-expansion-panel>
 
         <mat-expansion-panel>
@@ -34,7 +34,7 @@
 
           <button mat-button color="primary" (click)="asignarTipoBoton('altalocal')">Alta</button>
           <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Lista</button>
-          <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Movimientos</button>
+          <!-- <button mat-button color="primary" (click)="asignarTipoBoton('listarlocales')">Movimientos</button> -->
         </mat-expansion-panel>
 
         </mat-accordion>
@@ -47,11 +47,11 @@
         </app-tabla-listados-usuarios>
         <app-tabla-listados-productos *ngSwitchCase="'listaproductos'" [rol]="rol">
         </app-tabla-listados-productos>
-        <app-tabla-listados-usuarios-movimientos *ngSwitchCase="'listaMovUsuarios'" [rol]="rol">
-          </app-tabla-listados-usuarios-movimientos>
+        <!-- <app-tabla-listados-usuarios-movimientos *ngSwitchCase="'listaMovUsuarios'" [rol]="rol">
+          </app-tabla-listados-usuarios-movimientos> -->
 
-          <app-tabla-listados-productos-movimientos *ngSwitchCase="'lmp'" [rol]="rol">
-          </app-tabla-listados-productos-movimientos>
+          <!-- <app-tabla-listados-productos-movimientos *ngSwitchCase="'lmp'" [rol]="rol">
+          </app-tabla-listados-productos-movimientos> -->
 
         <app-alta-producto *ngSwitchCase="'altaproducto'"> </app-alta-producto>
 

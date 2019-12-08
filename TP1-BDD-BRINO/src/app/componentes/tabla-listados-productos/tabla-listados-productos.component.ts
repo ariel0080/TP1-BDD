@@ -53,6 +53,10 @@ export class TablaListadosProductosComponent implements OnInit {
   usuarioActivo: Observable<any>;
   productoActivo: Observable<any>;
   userColection: AngularFirestoreCollection;
+  Prodmov: boolean = false;
+  prodMovimiento$: Observable<any[]>;
+  movimientosTablaProductos: MatTableDataSource<any>;
+  columnasTablaMov: string[];
 
   constructor(private ps: ProductoService, private as: AngularFirestore, private us: AuthService, private Uss: UsuarioService ,private Ms:MovimientoService, private lS: LocalService) {
   this.productos = this.as.collection<ProductoI>('productos');}
@@ -67,9 +71,11 @@ export class TablaListadosProductosComponent implements OnInit {
         'stock',
         'local',
         'fechaCreacion',
+        'movProd',
         'activo',
         'id'
       ];
+      this.columnasTablaMov =['fecha','local','producto','tipo','usuario'];
     } else {
       this.columnasTabla = [
         'nombre',
@@ -78,8 +84,10 @@ export class TablaListadosProductosComponent implements OnInit {
         'stock',
         'local',
         'fechaCreacion',
+        'movProd',
         'activo'
       ];
+      this.columnasTablaMov =['fecha','local','producto','tipo','usuario'];
     }
   
     if (this.rol === 'Administrador') {
@@ -232,5 +240,15 @@ export class TablaListadosProductosComponent implements OnInit {
 });
   }
 
+  verMovimientosproducto(id: string){
+    console.log("apretaste movimientos");
+    this.Prodmov = true;
+    this.prodMovimiento$ = this.ps.traerMovimientosProductos(id,'productos');
+    this.prodMovimiento$.subscribe(datosMov => {
+    this.movimientosTablaProductos = new MatTableDataSource(datosMov);
+      
+     
+    })
+  }
 
 }

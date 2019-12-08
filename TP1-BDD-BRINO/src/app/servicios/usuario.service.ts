@@ -28,6 +28,10 @@ export class UsuarioService {
     this.usuarios.doc(uid).update({activo: false});
   }
 
+  habilitarUsuario(uid: string){
+    this.usuarios.doc(uid).update({activo: true});
+  }
+
   subirFoto(foto: File, uid: string) {
     const pathFoto = `imagenes/${uid}`;
     const tarea = this.afs.upload(pathFoto, foto);
