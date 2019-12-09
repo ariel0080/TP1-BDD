@@ -62,6 +62,9 @@ export class UsuarioService {
   }
 
 
+
+
+
   traerUsuarios(): Observable<any[]> {
     return this.usuarios.snapshotChanges().pipe(
       map(actions => {

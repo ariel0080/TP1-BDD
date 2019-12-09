@@ -23,6 +23,7 @@ export class ProductoService {
   usuario$: Observable<UsuarioI>;
 
 
+
   constructor(private af: AngularFirestore, private afs: AngularFireStorage, private ms: MovimientoService, private ls: LocalService,
      private as: AuthService) {
     this.productos = this.af.collection<ProductoI>('productos');
@@ -34,6 +35,7 @@ export class ProductoService {
       if(foto){
         this.subirFoto(foto[0], doc.id);
         this.productos.doc(doc.id).update({ id: doc.id });
+                
       }
 
 
@@ -59,6 +61,7 @@ export class ProductoService {
 
   }
 
+  
   deshabilitarProducto(uid: string) {
     this.productos.doc(uid).update({activo: false});
   }

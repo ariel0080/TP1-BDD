@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, AnimationDurations } from '@angular/material';
 import { ProductoService } from 'src/app/servicios/producto.service';
 import {
   trigger,
@@ -241,14 +241,27 @@ export class TablaListadosProductosComponent implements OnInit {
   }
 
   verMovimientosproducto(id: string){
-    console.log("apretaste movimientos");
+    if(this.rol === 'Administrador'){
+      console.log("apretaste movimientos");
     this.Prodmov = true;
     this.prodMovimiento$ = this.ps.traerMovimientosProductos(id,'productos');
     this.prodMovimiento$.subscribe(datosMov => {
     this.movimientosTablaProductos = new MatTableDataSource(datosMov);
-      
-     
+           
     })
-  }
+    }else{
+    
+    this.usuarioActivo.subscribe(usuario => {
+    console.log("apretaste movimientos");
+    this.Prodmov = true;
+    this.prodMovimiento$ = this.ps.traerMovimientosProductos(id,'productos');
+    this.prodMovimiento$.subscribe(datosMov => {
+    this.usuarioActivo = this.us.traerUsuarioActivo();
+    this.movimientosTablaProductos = new MatTableDataSource(datosMov);
+    if(usuario.email != 'admin@admin.com'){this.movimientosTablaProductos.filter = usuario.email;}
+    console.log(usuario);
+    })
+    })
+  }}
 
 }

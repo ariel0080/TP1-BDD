@@ -25,7 +25,9 @@ export class AltaProductoComponent implements OnInit {
   public movProd:MovimientoI;
   usuarioActivo: Observable<any>;
   productos: AngularFirestoreCollection;
-
+  idp: string;
+  ll: string;
+  kk: string;
   constructor(private ps: ProductoService,private as: AngularFirestore,  private us: AuthService,private Uss: UsuarioService ,private Ms:MovimientoService, private lS: LocalService) {
     this.productoForm = new FormGroup({
       nombre: new FormControl(''),
@@ -41,10 +43,10 @@ export class AltaProductoComponent implements OnInit {
     this.productos = this.as.collection<ProductoI>('productos');
     this.locales=this.lS.traerLocales();
     this.locales.subscribe(datos => {
-    this.arrayLocales = new Array<string>();
-    datos.forEach(element => {
-    this.tmp = JSON.parse(JSON.stringify(element));
-    this.arrayLocales.push(this.tmp.nombre);
+           this.arrayLocales = new Array<string>();
+            datos.forEach(element => {
+           this.tmp = JSON.parse(JSON.stringify(element));
+            this.arrayLocales.push(this.tmp.nombre);
     
                              }
                 )                   })
@@ -61,19 +63,63 @@ export class AltaProductoComponent implements OnInit {
       observaciones: this.productoForm.value.observaciones,
       foto: '',
       activo: true
+    
     };
+
+    let ll = this.productoForm.value.local;
+    let kk = this.productoForm.value.nombre;
 
       
     this.ps.persistirProducto(productoTmp, this.productoForm.value.foto.files);
+    
 
     
     //--------------------dasdassad-asdasdasdasd-asdasdasdas-dasdasd--
 
+   
+    
+
+    this.usuarioActivo = this.us.traerUsuarioActivo();
+    this.usuarioActivo.subscribe(usuario => {
+      
+
+    
+
+    const movimientosTmp = {usuario: 'admin@admin.com',tipo: TipoMovimiento.crear,fecha: new Date(),local: ll,producto: kk}
+
+    this.ps.traerProductos().subscribe(p => {
+      
+      p.forEach(pp => { if (pp.nombre === kk && pp.local == ll){this.idp = pp.id; }})
+
+    });
+
+    this.lS.traerLocales().subscribe(locales => {
+      let idLocal: string;
+      let idUser: string;
+      
+      locales.forEach(localFE => {
+        
+       
+        
+        if (localFE.nombre === ll) {idLocal = localFE.id;}})
+      this.Uss.traerUsuarios().subscribe(UsuariosTmp => {
+        UsuariosTmp.forEach(uId => {if (uId.email == usuario.email) {idUser = uId.id;}})
+
+        console.log("PRODUCTO: ",this.idp,"---USUARIO_ ", idUser,"-----LOCAL: ",idLocal)
+    this.Ms.persistirMovimiento(movimientosTmp, this.idp, "productos");
+    this.Ms.persistirMovimiento(movimientosTmp, idUser, "usuarios");
+    this.Ms.persistirMovimiento(movimientosTmp, idLocal, "locales");
+  });
+})
+
+
+
+});
     
    ///---------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> 
    
-
-
+  
+   
 
 
 
