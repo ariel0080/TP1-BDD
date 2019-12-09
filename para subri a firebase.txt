@@ -1,0 +1,59 @@
+ng build
+
+npm install -g firebase-tools (solo una vez)
+firebase login(solo una vez)
+firebase init(solo una vez)
+
+	database
+	firestone
+	hosting
+	storage
+
+firebase deploy
+
+
+___________
+
+tenemos que:
+
+usuario solo modifica stock
+admin da de alta productos y modifica stock
+admin es quien asigna local al usuario
+usuario tiene que tener un grupo local
+si usario no tiene local no puede mostrar nada
+
+
+
+
+movimientos:
+
+usuario (ve solo sus movimientos relacionao con el stock) alta baja venta 
+
+Correcion que pide octavio:
+
+existan 10 productos
+existan 3 usuario x local
+existan 3 locales
+
+
+pararme en un producto y ver los movimientos mios de usuario 
+pararme en un local y filtrar los movimientos de usuarios
+pararme en un usuario y ver todos los movimientos
+
+
+admin ve todo, pero puede filtrar
+
+usuario ve solo lo suyo
+
+
+ 
+
+
+
+yo no probe todo aun
+
+
+
+
+
+
