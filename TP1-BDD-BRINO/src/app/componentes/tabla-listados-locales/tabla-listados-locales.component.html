@@ -1,6 +1,5 @@
 <mat-form-field>
-    <input matInput placeholder="Filtros" />
-    <!--(keyup)="applyFilter($event.target.value)"-->
+    <input matInput (keyup)="zZ($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
   <div>
@@ -60,6 +59,12 @@
 
   <div *ngIf=locMov>
       <H4>TABLA DE MOVIMIENTOS DEL LOCAL SELECCIONADO</H4>
+
+      <mat-form-field>
+          <input matInput (keyup)="yY($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+
+
     <table mat-table [dataSource]="movimientosTablaLocales" matSort>
        <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>

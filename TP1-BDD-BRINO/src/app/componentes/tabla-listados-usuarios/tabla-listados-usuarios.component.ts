@@ -76,4 +76,12 @@ export class TablaListadosUsuariosComponent implements OnInit {
   habilitarUsuario(id: string ){
     this.us.habilitarUsuario(id);
   }
+
+   aF(filterValue: string) {
+    this.datosTabla.filter = filterValue.trim().toLowerCase();
+  }
+
+  aK(filterValue: string) {
+    this.movimientosTabla.filter = filterValue.trim().toLowerCase();
+  }
 }

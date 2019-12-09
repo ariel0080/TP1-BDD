@@ -264,4 +264,12 @@ export class TablaListadosProductosComponent implements OnInit {
     })
   }}
 
+  applyFilter(filterValue: string) {
+    this.datosTabla.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilter2(filterValue: string) {
+    this.movimientosTablaProductos.filter = filterValue.trim().toLowerCase();
+  }
+
 }

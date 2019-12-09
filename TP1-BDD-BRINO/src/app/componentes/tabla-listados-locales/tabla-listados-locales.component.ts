@@ -52,4 +52,12 @@ export class TablaListadosLocalesComponent implements OnInit {
      
     })
   }
+
+  zZ(filterValue: string) {
+    this.datosTabla.filter = filterValue.trim().toLowerCase();
+  }
+
+  yY(filterValue: string) {
+    this.movimientosTablaLocales.filter = filterValue.trim().toLowerCase();
+  }
 }

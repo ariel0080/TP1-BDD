@@ -1,6 +1,5 @@
 <mat-form-field>
-    <input matInput placeholder="Filtros" />
-    <!--(keyup)="applyFilter($event.target.value)"-->
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
   <div>
@@ -91,9 +90,12 @@
       <tr mat-row  *matRowDef="let producto; columns: columnasTabla" class="producto-fila" [class.fila-expandida]="productoExpandido === producto" 
         (click)="productoExpandido = productoExpandido === producto ? null : producto"></tr>
       <tr mat-row *matRowDef="let columnas; columns: ['detalle']" class="detalle-fila"></tr>
-    </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      
+    </table>
+    
+    <mat-paginator [length]="100"   [pageSize]="5"  [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+   
   </div>
 
   <!--ACA AGREGO INFO-->
@@ -101,10 +103,15 @@
   <!--ACA AGREGO INFO-->
   <!--ACA AGREGO INFO-->
 
-
+  
  
    <div *ngIf=Prodmov>
       <H4>TABLA DE MOVIMIENTOS DEL USUARIO SELECCIONADO</H4>
+
+      <mat-form-field>
+          <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        
     <table mat-table [dataSource]="movimientosTablaProductos" matSort>
        <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>

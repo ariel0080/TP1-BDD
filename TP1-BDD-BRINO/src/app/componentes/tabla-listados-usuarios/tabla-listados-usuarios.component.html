@@ -1,6 +1,5 @@
 <mat-form-field>
-    <input matInput placeholder="Filtros" />
-    <!--(keyup)="applyFilter($event.target.value)"-->
+    <input matInput (keyup)="aF($event.target.value)" placeholder="Filter">
   </mat-form-field>
   
   <div>
@@ -69,6 +68,10 @@
   <!--AQUI COMIENZA NUEVA LISTA-->
   <H4>TABLA DE MOVIMIENTOS DEL USUARIO SELECCIONADO</H4>
    <div *ngIf=mov>
+      <mat-form-field>
+          <input matInput (keyup)="aK($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+
     <table mat-table [dataSource]="movimientosTabla" matSort>
        <ng-container matColumnDef="fecha">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
